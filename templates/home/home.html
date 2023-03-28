@@ -31,19 +31,27 @@
                     </button>
                 </div>
                 <br><br><br>
-                <h3>Popular products</h3>
+                <div class="row">
+                    <div class="col-md-3 mt-3">
+                            <header class="section-heading">
+                                <h3 class="section-title">Popular products<a href="{% url 'all-products' %}"
+                                                                             class="btn btn-outline-secondary">See
+                                    all</a></h3>
+                            </header><!-- sect-heading -->
+                    </div>
+                </div>
                 <div class="row">
                     {% for product in products %}
                         <div class="col-md-3 mt-3">
                             <div class="card" style="width: 24rem;">
                                 {% if product.image1 %}
-                                    <a class="text-secondary" href="#"><img
+                                    <a class="text-secondary" href="{{ product.get_url }}"><img
                                             src="{{ product.image1.url }}" class="card-img-top" alt="..."></a>
 
                                 {% endif %}
                                 <div class="card-body">
                                     <h5 class="card-title"><a class="text-secondary"
-                                                              href="#">{{ product.product_name }}</a>
+                                                              href="{{ product.get_url }}">{{ product.product_name }}</a>
                                     </h5>
                                     <p class="card-text fw-bold">{{ product.price }}€</p>
                                     <div class="btn-card-product">

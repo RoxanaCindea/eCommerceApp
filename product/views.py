@@ -1,6 +1,5 @@
 from django.shortcuts import get_object_or_404, render
 from django.views.generic import ListView
-
 from category.models import Category
 from product.models import Product
 
@@ -31,8 +30,20 @@ def products_by_category(request, category_slug=None):
 
     context = {
         'products': products,
+        'categories': categories
     }
 
     context['count'] = context['products'].filter(category=categories, is_available=True).count()
-
     return render(request, 'product/products_by_category.html', context)
+
+
+def product_detail(request, category_slug, product_slug):
+    try:
+        single_product = Product.objects.get(category__slug=category_slug, slug=product_slug)
+    except Exception as e:
+        raise e
+
+    context = {
+        'single_product': single_product
+    }
+    return render(request, 'product/product_detail.html', context)

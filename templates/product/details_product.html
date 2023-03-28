@@ -1,29 +1,23 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %} Details - {{ product }} {% endblock %}
+{% block title %} Details - {{ single_product.product_name }} {% endblock %}
 
 {% block content %}
-    <div class="container-fluid">
+    <div class="container">
         <div class="row">
             <div class="col-md-4  mt-3">
 
                 <div id="carouselExample" class="carousel slide">
                     <div class="carousel-inner">
                         <div class="carousel-item active">
-                            {% if product.product_image %}
-                                <img src="{{ product.product_image.url }}" class="d-block w-100" alt="...">
-                            {% endif %}
+                                <img src="{{ single_product.image1.url }}" class="d-block w-100" alt="...">
                         </div>
                         <div class="carousel-item">
-                            {% if product.product_image1 %}
-                                <img src="{{ product.product_image1.url }}" class="d-block w-100" alt="...">
-                            {% endif %}
+                                <img src="{{ single_product.image2.url }}" class="d-block w-100" alt="...">
                         </div>
                         <div class="carousel-item">
-                            {% if product.product_image2 %}
-                                <img src="{{ product.product_image2.url }}" class="d-block w-100" alt="...">
-                            {% endif %}
+                                <img src="{{ single_product.image3.url }}" class="d-block w-100" alt="...">
                         </div>
                     </div>
                     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample"

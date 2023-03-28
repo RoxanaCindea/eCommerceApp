@@ -18,13 +18,11 @@
                         Jewellery
                     </a>
                     <ul class="dropdown-menu">
+
                         <li><a class="dropdown-item" href="{% url 'all-products' %}">All products</a></li>
-                        <li><a class="dropdown-item" href="#">Bracelets</a></li>
-                        <li><a class="dropdown-item" href="#">Brooches</a></li>
-                        <li><a class="dropdown-item" href="#">Earrings</a></li>
-                        <li><a class="dropdown-item" href="#">Necklace</a></li>
-                        <li><a class="dropdown-item" href="#">Pendants</a></li>
-                        <li><a class="dropdown-item" href="#">Rings</a></li>
+                        {% for category in links %}
+                        <li><a class="dropdown-item" href="{{ category.get_url }}">{{ category.category_name }}</a></li>
+                        {% endfor %}
 
                     </ul>
                 </li>
