@@ -1,4 +1,40 @@
 
+body {
+    text-decoration: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    text-decoration: none;
+
+}
+
+a {
+  text-decoration: none;
+}
+
+.card-body {
+    text-decoration: none;
+}
+
+.text-secondary {
+    text-decoration: none;
+}
+
+.card-title {
+    text-decoration: none;
+}
+
 .section-title {
     padding-right: 100px;
 }
+
+.img-sm {
+    height: 120px;
+    width: 120px;
+}
+
