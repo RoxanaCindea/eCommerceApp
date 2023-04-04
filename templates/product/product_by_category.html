@@ -1,12 +1,24 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block title %} All products {% endblock %}
+
+{% block title %}
+    {% if categories %}
+        Jewellery | {{ categories }}
+    {% else %}
+        Jewellery | All products
+    {% endif %}
+{% endblock %}
+
 
 {% block content %}
     <br><br>
     <section class="section-pagetop bg">
         <div class="container">
-            <h2 class="title-page">All Products</h2>
+            {% if categories %}
+                <h2 class="title-page">{{ categories }}</h2>
+            {% else %}
+                <h2 class="title-page">All products</h2>
+            {% endif %}
         </div>
     </section>
     <br><br>
@@ -88,13 +100,13 @@
 
                     <header class="border-bottom mb-4 pb-3">
                         <div class="form-inline">
-                            <span class="mr-md-auto"><b>{{ count }}</b> items found</span>
+                            <span class="mr-md-auto"><b>{{ count }}</b> Items found </span>
 
                         </div>
                     </header>
                     <div class="container px-10">
                         <div class="row">
-                            {% for product in all_products %}
+                            {% for product in products %}
                                 <div class="col-lg-4">
                                     <div class="card" style="width: 20rem;">
                                         {% if product.image1 %}
@@ -107,20 +119,45 @@
                                                                       href="{{ product.get_url }}">{{ product.product_name }}</a>
                                             </h5>
                                             <p class="card-text fw-bold">{{ product.price }}€</p>
-                                            <div class="btn-card-product">
-                                                <a href="#" class="btn btn-outline-dark"><img
-                                                        src="{% static "images/heart.svg" %}"
-                                                        alt="image"></a>
-                                                <a href="#" class="btn btn-outline-dark"><img
-                                                        src="{% static "images/bag.svg" %}"
-                                                        alt="image"></a>
+                                            <div class="btn-card-product text-center">
+                                                <a href="{{ product.get_url }}"
+                                                   class="btn btn-outline-dark">View Details</a>
+
                                             </div>
+
                                         </div>
                                     </div>
                                 </div>
                             {% endfor %}
                         </div>
                     </div>
+                    <nav class="mt-4" aria-label="Page navigation sample">
+                        {% if products.has_other_pages %}
+                            <ul class="pagination">
+                                {% if products.has_previous %}
+                                    <li class="page-item"><a class="page-link"
+                                                             href="?page={{ products.previous_page_number }}">Previous</a>
+                                    </li>
+                                {% else %}
+                                    <li class="page-item disabled"><a class="page-link"
+                                                                      href="#">Previous</a>
+                                {% endif %}
+                                {% for i in products.paginator.page_range %}
+                                    {% if products.number == i %}
+                                        <li class="page-item active"><a class="page-link" href="#">{{ i }}</a></li>
+                                    {% else %}
+                                        <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+                                    {% endif %}
+                                {% endfor %}
+                                {% if products.has_next %}
+                                    <li class="page-item"><a class="page-link" href="?page={{ products.next_page_number }}">Next</a></li>
+                                {% else %}
+                                    <li class="page-item disabled"><a class="page-link" href="#">Next</a></li>
+                                {% endif %}
+                            </ul>
+                        {% endif %}
+                    </nav>
+
                 </main>
             </div>
         </div>

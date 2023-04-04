@@ -1,3 +1,4 @@
+from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import render, redirect, get_object_or_404
 from cart.models import Cart, CartItem
 from product.models import Product
@@ -11,6 +12,8 @@ def _cart_id(request):
 
 
 def add_cart(request, product_id):
+    color = request.GET['color']
+    size = request.GET['size']
     product = Product.objects.get(id=product_id)  # get the product
 
     try:
@@ -56,7 +59,7 @@ def remove_cart_item(request, product_id):
     return redirect('cart')
 
 
-def cart(request, total=0, quantity=0, cart_items=0):
+def cart(request, total=0, quantity=0, cart_items=0, tax=0, grant_total=0):
     try:
         cart_session = Cart.objects.get(cart_id=_cart_id(request))
         cart_items = CartItem.objects.filter(cart=cart_session, is_active=True)
@@ -64,11 +67,11 @@ def cart(request, total=0, quantity=0, cart_items=0):
             total += (cart_item.product.price * cart_item.quantity)
             quantity += cart_item.quantity
 
-    except CartItem.DoesNotExist:
-        pass  # just ignore
+        tax = (2 * total) / 100
+        grant_total = total + tax
 
-    tax = (2 * total) / 100
-    grant_total = total + tax
+    except ObjectDoesNotExist:
+        pass  # just ignore
 
     context = {
         'total': total,
@@ -77,5 +80,4 @@ def cart(request, total=0, quantity=0, cart_items=0):
         'tax': tax,
         'grand_total': grant_total,
     }
-
     return render(request, 'cart/cart.html', context)

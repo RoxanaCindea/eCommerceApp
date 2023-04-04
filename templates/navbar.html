@@ -49,9 +49,9 @@
 
             </li>
             <li class="nav-item">
-                <a class="nav-link" aria-current="page" href="#"><img class="btn-nav-image"
+                <a class="nav-link" aria-current="page" href="{% url 'cart' %}"><img class="btn-nav-image"
                                                                       src="{% static "images/bag.svg" %}"
-                                                                      alt="...">0</a>
+                                                                      alt="...">{{ cart_count }}</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link active" aria-current="page" href="#">Login</a>

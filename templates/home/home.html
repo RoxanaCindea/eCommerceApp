@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block title %} Home {% endblock %}
+{% block title %} Jewellery | Home {% endblock %}
 
 {% block content %}
     <br>
@@ -54,13 +54,10 @@
                                                               href="{{ product.get_url }}">{{ product.product_name }}</a>
                                     </h5>
                                     <p class="card-text fw-bold">{{ product.price }}€</p>
-                                    <div class="btn-card-product">
-                                        <a href="#" class="btn btn-outline-dark"><img
-                                                src="{% static "images/heart.svg" %}"
-                                                alt="image"></a>
-                                        <a href="#" class="btn btn-outline-dark"><img
-                                                src="{% static "images/bag.svg" %}"
-                                                alt="image"></a>
+                                    <div class="btn-card-product text-center">
+                                        <a href="{{ product.get_url}}"
+                                           class="btn btn-outline-dark">View Details</a>
+
                                     </div>
                                 </div>
                             </div>

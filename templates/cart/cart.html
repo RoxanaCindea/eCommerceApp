@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block title %} Cart {% endblock %}
+{% block title %} Jewellery | Cart {% endblock %}
 
 {% block content %}
     <section class="section-content padding-y bg">
@@ -32,7 +32,7 @@
                                             <div class="aside"><img src="{{ cart_item.product.image1.url }}"
                                                                     class="img-sm" alt="product-image"></div>
                                             <figcaption class="info">
-                                                <a href="#"
+                                                <a href="{{ cart_item.product.get_url }}"
                                                    class="title text-dark">{{ cart_item.product.product_name }}</a>
                                             </figcaption>
                                         </figure>
@@ -96,7 +96,7 @@
                                 <img src="{% static 'images/ro.png' %}" alt='payments-image' height="60">
                             </p>
                             <a href="#" class="btn btn-primary btn-block"> Checkout </a>
-                            <a href="#" class="btn btn-light btn-block">Continue Shopping</a>
+                            <a href="{% url 'all-products' %}" class="btn btn-light btn-block">Continue Shopping</a>
                         </div> <!-- card-body.// -->
                     </div> <!-- card.// -->
 
