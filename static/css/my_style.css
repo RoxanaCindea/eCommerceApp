@@ -10,11 +10,11 @@ h4,
 h5,
 h6 {
     text-decoration: none;
-
+    color: gray;
 }
 
-a {
-  text-decoration: none;
+a, p {
+    text-decoration: none;
 }
 
 .card-body {
@@ -34,7 +34,11 @@ a {
 }
 
 .img-sm {
-    height: 120px;
-    width: 120px;
+    height: 100px;
+    width: 80px;
+}
+
+.bag-add-cart {
+    color: white;
 }
 

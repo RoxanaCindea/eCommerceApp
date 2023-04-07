@@ -42,7 +42,8 @@
                         </article> <!-- gallery-wrap .end// -->
                     </aside>
                     <main class="col-md-6 border-left">
-                        <form action="{% url 'add-cart' single_product.id %}" method="GET">
+                        <form action="{% url 'add-cart' single_product.id %}" method="POST">
+                            {% csrf_token %}
                             <article class="content-body">
 
                                 <h2 class="title">{{ single_product.product_name }}</h2>
@@ -58,42 +59,34 @@
                                 <div class="row">
                                     <div class="item-option-select">
                                         <h6>Choose color</h6>
-                                        <select name="color" class="form-control">
-                                            <option value="yellow gold">Yellow Gold</option>
-                                            <option value="gun black">Gun Black</option>
-                                            <option value="silver">Silver</option>
+                                        <select name="color" class="form-control w-25" required>
+                                            <option value="" disabled selected>Select</option>
+                                            {% for i in single_product.variation_set.colors %}
+                                                <option value="{{ i.variation_value | lower }}">{{ i.variation_value | capfirst }}</option>
+                                            {% endfor %}
                                         </select>
                                     </div>
                                 </div>
+                                <br>
                                 <div class="row">
                                     <div class="item-option-select">
                                         <h6>Select Size</h6>
-                                        <select name="size" class="form-control">
-                                            <option value="small">Small</option>
-                                            <option value="medium">Medium</option>
-                                            <option value="large">Large</option>
+                                        <select name="size" class="form-control w-25">
+                                            <option value="" disabled selected>Select</option>
+                                            {% for i in single_product.variation_set.sizes %}
+                                                <option value="{{ i.variation_value | lower }}">{{ i.variation_value | capfirst }}</option>
+                                            {% endfor %}
                                         </select>
                                     </div>
-                                </div> <!-- row.// -->
+                                </div>
                                 <hr>
                                 {% if single_product.stock <= 0 %}
                                     <h5 class="text-danger">Out of Stock</h5>
                                 {% else %}
-                                    {% if in_cart %}
-                                        <a href="{% url 'add-cart' single_product.id %}" class="btn  btn-success"> <span
-                                                class="text">Added to cart</span> <img
-                                                src="{% static "images/check.svg" %}"
-                                                alt="image"> </a>
-                                        <a href="{% url 'cart' %}" class="btn  btn-outline-primary"> <span
-                                                class="text">View cart</span> <img
-                                                src="{% static "images/eye.svg" %}"
-                                                alt="image"> </a>
-                                    {% else %}
-                                        <button type="submit" class="btn  btn-primary"> <span
-                                                class="text">Add to cart</span> <img
-                                                src="{% static "images/bag.svg" %}"
-                                                alt="image"></button>
-                                    {% endif %}
+                                    <button type="submit" class="btn  btn-primary"> <span
+                                            class="text">Add to cart</span> <img
+                                            src="{% static "images/bag.svg" %}"
+                                            class="bag-add-cart" alt="image"></button>
                                 {% endif %}
                             </article> <!-- product-info-aside .// -->
                         </form>
