@@ -3,13 +3,14 @@
 {% block title %} Jewellery | Cart {% endblock %}
 
 {% block content %}
+    <br>
     <section class="section-content padding-y bg">
-        <div class="container">
+        <div class="container-fluid">
             {% if not cart_items %}
                 <h2 class="text-center">Your Shopping Cart is Empty</h2>
                 <br>
                 <div class="text-center">
-                    <a href="#" class="btn btn-primary">Continue Shopping</a>
+                    <a href="{% url 'all-products' %}" class="btn btn-primary">Continue Shopping</a>
                 </div>
             {% else %}
                 <div class="row">
@@ -46,7 +47,6 @@
                                             </figure>
                                         </td>
                                         <td>
-                                            <!-- col.// -->
                                             <div class="col">
                                                 <div class="input-group input-spinner">
                                                     <div class="input-group-prepend">
@@ -73,14 +73,14 @@
                                                             </button>
                                                         </form>
                                                     </div>
-                                                </div> <!-- input-group.// -->
-                                            </div> <!-- col.// -->
+                                                </div>
+                                            </div>
                                         </td>
                                         <td>
                                             <div class="price-wrap">
                                                 <var class="price">{{ cart_item.sub_total }}€</var> <br>
                                                 <small class="text-muted">{{ cart_item.product.price }}€ each</small>
-                                            </div> <!-- price-wrap .// -->
+                                            </div>
                                         </td>
                                         <td class="text-right">
                                             <a href="{% url 'remove-cart-item' cart_item.product.id cart_item.id %}"
@@ -91,9 +91,8 @@
                                     {% endfor %}
                                 </tbody>
                             </table>
-                        </div> <!-- card.// -->
-
-                    </aside> <!-- col.// -->
+                        </div>
+                    </aside>
                     <aside class="col-lg-3">
 
                         <div class="card">
@@ -116,16 +115,11 @@
                                 </p>
                                 <a href="#" class="btn btn-primary btn-block"> Checkout </a>
                                 <a href="{% url 'all-products' %}" class="btn btn-light btn-block">Continue Shopping</a>
-                            </div> <!-- card-body.// -->
-                        </div> <!-- card.// -->
-
-                    </aside> <!-- col.// -->
-
-
-                </div> <!-- row.// -->
+                            </div>
+                        </div>
+                    </aside>
+                </div>
             {% endif %}
-            <!-- ============================ COMPONENT 1 END .// ================================= -->
-
-        </div> <!-- container .//  -->
+        </div>
     </section>
 {% endblock %}

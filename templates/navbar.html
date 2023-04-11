@@ -10,7 +10,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="{% url 'homepage' %}">Home</a>
+                    <a class="nav-link" aria-current="page" href="{% url 'homepage' %}">Home</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
@@ -18,12 +18,11 @@
                         Jewellery
                     </a>
                     <ul class="dropdown-menu">
-
                         <li><a class="dropdown-item" href="{% url 'all-products' %}">All products</a></li>
                         {% for category in links %}
-                        <li><a class="dropdown-item" href="{{ category.get_url }}">{{ category.category_name }}</a></li>
+                            <li><a class="dropdown-item" href="{{ category.get_url }}">{{ category.category_name }}</a>
+                            </li>
                         {% endfor %}
-
                     </ul>
                 </li>
                 <li class="nav-item">
@@ -34,31 +33,36 @@
                 </li>
             </ul>
             <form action="{% url 'search' %}" class="d-flex" role="search" method="GET">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="keyword">
+                <input class="form-control me-2 w-100" type="search" placeholder="Search" aria-label="Search"
+                       name="keyword">
                 <button class="btn btn-outline-secondary" type="submit">Search</button>
             </form>
         </div>
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-                <a class="nav-link" aria-current="page" href="#"><img class="btn-nav-image-person"
-                                                                      src="{% static "images/person.svg" %}" alt="..."></a>
-            </li>
-            <li class="nav-item">
                 <a class="nav-link" aria-current="page" href="#"><img class="btn-nav-image"
                                                                       src="{% static "images/heart.svg" %}" alt="...">0</a>
-
             </li>
             <li class="nav-item">
                 <a class="nav-link" aria-current="page" href="{% url 'cart' %}"><img class="btn-nav-image"
-                                                                      src="{% static "images/bag.svg" %}"
-                                                                      alt="...">{{ cart_count }}</a>
+                                                                                     src="{% static "images/bag.svg" %}"
+                                                                                     alt="...">{{ cart_count }}</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="{% url 'login' %}">Sign in</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="{% url 'register' %}">Registration</a>
-            </li>
+            {% if user.id is None %}
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="{% url 'login' %}">Sign in</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="{% url 'register' %}">Register</a>
+                </li>
+            {% else %}
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="#">Dashboard</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="{% url 'logout' %}">Logout</a>
+                </li>
+            {% endif %}
         </ul>
 
     </div>
