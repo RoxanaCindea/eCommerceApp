@@ -45,9 +45,9 @@
                                 <div class="card-body">
 
                                     <ul class="list-menu">
-                                        <li><a href="{% url 'all-products' %}">All products</a></li>
+                                        <li><a class="category" href="{% url 'all-products' %}">All products</a></li>
                                         {% for category in links %}
-                                            <li><a href="{{ category.get_url }}">{{ category.category_name }}</a></li>
+                                            <li><a class="category" href="{{ category.get_url }}">{{ category.category_name }}</a></li>
                                         {% endfor %}
                                     </ul>
                                 </div>

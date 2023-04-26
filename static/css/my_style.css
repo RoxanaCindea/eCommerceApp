@@ -1,8 +1,7 @@
 
-body {
-    text-decoration: none;
-    background-color: red;
-}
+/*body {*/
+/*    text-decoration: none;*/
+/*}*/
 
 h1,
 h2,
@@ -10,7 +9,6 @@ h3,
 h4,
 h5,
 h6 {
-    text-decoration: none;
     color: gray;
 }
 
@@ -18,17 +16,6 @@ a, p {
     text-decoration: none;
 }
 
-.card-body {
-    text-decoration: none;
-}
-
-.text-secondary {
-    text-decoration: none;
-}
-
-.card-title {
-    text-decoration: none;
-}
 
 .section-title {
     padding-right: 100px;
@@ -41,5 +28,18 @@ a, p {
 
 .bag-add-cart {
     color: white;
+}
+
+.btn-nav-image {
+    width: 20px;
+    height: 20px;
+}
+
+.list-menu {
+    color: black;
+}
+
+.category {
+    color: black;
 }
 
