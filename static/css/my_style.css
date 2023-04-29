@@ -1,7 +1,30 @@
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
 
-/*body {*/
-/*    text-decoration: none;*/
-/*}*/
+html {
+    font-family: sans-serif;
+    line-height: 1.15;
+    -webkit-text-size-adjust: 100%;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
+    display: block;
+}
+
+body {
+    margin: 0;
+    font-family: "Inter", Arial, "Helvetica Neue", "Segoe UI", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #343a40;
+    text-align: left;
+    background-color: #fff;
+}
 
 h1,
 h2,
@@ -43,3 +66,27 @@ a, p {
     color: black;
 }
 
+.form-row {
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: -5px;
+    margin-left: -5px;
+}
+
+.form-row > .col,
+.form-row > [class*=col-] {
+    padding-right: 5px;
+    padding-left: 5px;
+}
+
+.form-group {
+    margin-bottom: 1.2rem;
+}
+
+.form-inline .form-group {
+    display: flex;
+    flex: 0 0 auto;
+    flex-flow: row wrap;
+    align-items: center;
+    margin-bottom: 0;
+}
