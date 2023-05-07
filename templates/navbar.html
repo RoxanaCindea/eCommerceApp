@@ -1,6 +1,6 @@
 {% load static %}
 
-<nav class="navbar navbar-expand-lg border-bottom">
+<nav class="navbar navbar-expand-lg border-bottom" style="background-color: white;">
     <div class="container-fluid">
         <a class="navbar-brand fst-italic" href="{% url 'homepage' %}">Jewel</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
@@ -33,36 +33,36 @@
                 </li>
             </ul>
             <form action="{% url 'search' %}" class="d-flex" role="search" method="GET">
-                <input class="form-control me-2 w-100" type="search" placeholder="Search" aria-label="Search"
+                <input class="search form-control me-2" type="search" placeholder="Search" aria-label="Search"
                        name="keyword">
-                <button class="btn btn-outline-secondary" type="submit">Search</button>
+                <button class="btn" type="submit"><img class="btn-nav-image" src="{% static "images/search.svg" %}"
+                                                       alt="..."></button>
             </form>
         </div>
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                   aria-expanded="false">
+                    <img class="btn-nav-person" src="{% static "images/person.svg" %}" alt="..."></a>
+                <ul class="dropdown-menu">
+                    {% if user.id is None %}
+                        <li><a class="dropdown-item" href="{% url 'login' %}?next={{ url }}">Sign in</a></li>
+                        <li><a class="dropdown-item" href="{% url 'register' %}">Register</a></li>
+                    {% else %}
+                        <li><a class="dropdown-item" href="{% url 'dashboard' %}">Dashboard</a></li>
+                        <li><a class="dropdown-item" href="{% url 'logout' %}">Logout</a></li>
+                    {% endif %}
+                </ul>
+            </li>
             <li class="nav-item">
-                <a class="nav-link" aria-current="page" href="#"><img class="btn-nav-image"
-                                                                      src="{% static "images/heart.svg" %}" alt="...">0</a>
+                <a class="nav-link" aria-current="page" href="{% url 'wishlist' %}"><img class="btn-nav-image"
+                                                                                         src="{% static "images/heart.svg" %}"
+                                                                                         alt="...">{{ wishlist_count }}</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" aria-current="page" href="{% url 'cart' %}"><img class="btn-nav-image"
                                                                                      src="{% static "images/bag.svg" %}"
                                                                                      alt="...">{{ cart_count }}</a>
-            </li>
-            {% if user.id is None %}
-                <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="{% url 'login' %}">Sign in</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="{% url 'register' %}">Register</a>
-                </li>
-            {% else %}
-                <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="{% url 'dashboard' %}">Dashboard</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="{% url 'logout' %}">Logout</a>
-                </li>
-            {% endif %}
         </ul>
 
     </div>

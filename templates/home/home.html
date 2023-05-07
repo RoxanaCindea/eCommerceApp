@@ -3,20 +3,19 @@
 {% block title %} Jewellery | Home {% endblock %}
 
 {% block content %}
-    <br>
-    <div class="container-fluid px-5">
+    <div class="container-fluid pb-3">
         <div class="row">
-            <div class="col-md-10 offset-md-1">
+            <div class="col-md-12">
                 <div id="carouselExample" class="carousel slide">
-                    <div class="carousel-inner">
+                    <div class="carousel-inner" style="height: 850px; width: auto;">
                         <div class="carousel-item active">
-                            <img src="{% static 'images/home1.jpg' %}" class="d-block w-100 h-75" alt="...">
+                            <img src="{% static 'images/home1.jpg' %}" class="d-block w-100" alt="...">
                         </div>
                         <div class="carousel-item">
-                            <img src="{% static 'images/home2.png' %}" class="d-block w-100 h-75" alt="...">
+                            <img src="{% static 'images/home2.png' %}" class="d-block w-100" alt="...">
                         </div>
                         <div class="carousel-item">
-                            <img src="{% static 'images/home3.jpg' %}" class="d-block w-100 h-75" alt="...">
+                            <img src="{% static 'images/home3.jpg' %}" class="d-block w-100" alt="...">
                         </div>
                     </div>
                     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample"
@@ -30,33 +29,48 @@
                         <span class="visually-hidden">Next</span>
                     </button>
                 </div>
-                <br><br><br>
+                <br><br>
                 <div class="row">
-                    <div class="col-md-3 mt-3">
+                    <div class="col mt-3">
                         <header class="section-heading">
-                            <h3 class="section-title">Popular products<a href="{% url 'all-products' %}"
-                                                                         class="btn btn-outline-secondary">See all</a>
-                            </h3>
+                            <h1 class="section-title">Popular products <a href="{% url 'all-products' %}"
+                                                                          class="btn btn-secondary see-all">See all</a>
+                            </h1>
                         </header>
                     </div>
                 </div>
+                <br><br>
                 <div class="row">
                     {% for product in products %}
                         <div class="col-md-3 mt-3">
-                            <div class="card" style="width: 17.5rem; height: 34rem;">
+                            <div class="card card-home">
                                 {% if product.image1 %}
                                     <a class="text-secondary" href="{{ product.get_url }}"><img
-                                            src="{{ product.image1.url }}" class="card-img-top" alt="..."></a>
+                                            src="{{ product.image1.url }}" class="home-img card-img-top" alt="..."></a>
 
                                 {% endif %}
                                 <div class="card-body">
                                     <h5 class="card-title"><a class="text-secondary"
                                                               href="{{ product.get_url }}">{{ product.product_name }}</a>
                                     </h5>
-                                    <p class="card-text fw-bold">{{ product.price }}€</p>
+                                    <p class="price fw-bold mt-1">{{ product.price }} €</p>
+                                    <div class="rating-star mb-2 mt-0">
+                                        <span>
+                                            <i class="fa fa-star{% if product.average_review < 0.5 %}-o{% elif product.average_review >= 0.5 and product.average_review < 1 %}-half-o {% endif %}"
+                                               aria-hidden="true"></i>
+                                            <i class="fa fa-star{% if product.average_review < 1.5 %}-o{% elif product.average_review >= 1.5 and product.average_review < 2 %}-half-o {% endif %}"
+                                               aria-hidden="true"></i>
+                                            <i class="fa fa-star{% if product.average_review < 2.5 %}-o{% elif product.average_review >= 2.5 and product.average_review < 3 %}-half-o {% endif %}"
+                                               aria-hidden="true"></i>
+                                            <i class="fa fa-star{% if product.average_review < 3.5 %}-o{% elif product.average_review >= 3.5 and product.average_review < 4 %}-half-o {% endif %}"
+                                               aria-hidden="true"></i>
+                                            <i class="fa fa-star{% if product.average_review < 4.5 %}-o{% elif product.average_review >= 4.5 and product.average_review < 4 %}-half-o {% endif %}"
+                                               aria-hidden="true"></i>
+                                        </span>
+                                    </div>
                                     <div class="btn-card-product text-center">
                                         <a href="{{ product.get_url }}"
-                                           class="btn btn-outline-dark">View Details</a>
+                                           class="btn btn-dark w-100">View Details</a>
                                     </div>
                                 </div>
                             </div>

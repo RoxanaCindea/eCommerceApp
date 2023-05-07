@@ -9,7 +9,6 @@
                 {% include 'alerts.html' %}
                 <form action="{% url 'register' %}" method="POST">
                     {% csrf_token %}
-                    <hr>
                     <div class="form-row">
                         <div class="col form-group">
                             <label>First name</label>
@@ -44,7 +43,7 @@
                     </div>
                     <br>
                     <div class="col form-group">
-                        <button type="submit" class="btn btn-primary btn-block w-100">Register</button>
+                        <button type="submit" class="btn btn-dark btn-block w-100">Register</button>
                     </div>
                     {{ form.email.errors }}
                     {{ form.non_field_errors }}

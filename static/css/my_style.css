@@ -23,7 +23,7 @@ body {
     line-height: 1.5;
     color: #343a40;
     text-align: left;
-    background-color: #fff;
+    background-color: #F5F5F5;
 }
 
 h1,
@@ -35,13 +35,81 @@ h6 {
     color: gray;
 }
 
+hr {
+    box-sizing: content-box;
+    height: 0;
+    width: 550px;
+    overflow: visible;
+}
+
 a, p {
     text-decoration: none;
 }
 
 
-.section-title {
-    padding-right: 100px;
+.navbar {
+    display: flex;
+}
+
+.navbar-brand {
+    font-size: 40px;
+    color: #3D3C42;
+}
+
+.nav-link, .dropdown-item {
+    font-size: 25px;
+}
+
+.btn-nav-image {
+    width: 25px;
+    height: 25px;
+}
+
+.btn-nav-person {
+    width: 28px;
+    height: 28px
+}
+
+.search {
+    width: 500px;
+    height: 50px;
+}
+
+.card-home {
+    width: 30rem;
+    transition: box-shadow .3s;
+}
+
+.card-home:hover {
+    box-shadow: 0 0 30px rgba(33, 33, 33, .2);
+}
+
+.home-img {
+    width: 29.9rem;
+    height: 35rem;
+}
+
+.see-all {
+    margin-left: 1588px;
+    margin-right: 0;
+    width: 100px;
+    font-size: 20px;
+}
+
+.product-found {
+    color: gray;
+    font-size: 20px;
+}
+
+.category-img {
+    width: 25rem;
+    height: 30rem;
+    border-top-left-radius: 1%;
+    border-top-right-radius: 1%;
+}
+
+.card-category:hover {
+    box-shadow: 0 0 30px rgba(33, 33, 33, .2);
 }
 
 .img-sm {
@@ -49,13 +117,13 @@ a, p {
     width: 80px;
 }
 
-.bag-add-cart {
-    color: white;
-}
-
-.btn-nav-image {
+.btn-add {
     width: 20px;
     height: 20px;
+}
+
+.title-filter {
+    font-size: 20px;
 }
 
 .list-menu {
@@ -63,6 +131,11 @@ a, p {
 }
 
 .category {
+    color: black;
+}
+
+.category-filter {
+    font-size: 17px;
     color: black;
 }
 
@@ -90,3 +163,35 @@ a, p {
     align-items: center;
     margin-bottom: 0;
 }
+
+.btn-power {
+    color: white;
+}
+
+.description {
+    margin-right: 25px;
+}
+
+.title-product-description {
+    padding-top: 15px;
+    padding-bottom: 5px;
+}
+
+.review-content {
+    margin-left: 20px;
+}
+
+.text-muted {
+    margin-left: 550px;
+}
+
+.list-group-item.active {
+    background-color: black;
+    border: black;
+}
+
+.page-link.active {
+    background-color: black;
+    border: black;
+}
+

@@ -1,17 +1,19 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block title %} Jewellery | Cart {% endblock %}
+{% block title %} Jewellery | Checkout {% endblock %}
 
 {% block content %}
     <br>
     <section class="section-content padding-y bg">
         <div class="container-fluid">
+         <form action="{% url 'place_order' %}" method="POST">
             <div class="row">
                 <aside class="col-lg-4 offset-md-2">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="card-title mb-4">Billing Address</h4>
-                            <form action="" method="POST">
+
+                                <h4 class="card-title mb-4">Billing Address</h4>
+
                                 {% csrf_token %}
                                 <div class="form-row">
                                     <div class="col form-group">
@@ -61,6 +63,7 @@
                                     <label for="">Order Note</label>
                                     <textarea name="order_note" rows="2" class="form-control"></textarea>
                                 </div>
+
                         </div>
                     </div>
                 </aside>
@@ -97,7 +100,7 @@
                                             </figure>
                                         </td>
                                         <td>
-                                            <lable for="">{{ cart_item.quantity }}</lable>
+                                            <p>{{ cart_item.quantity }}</p>
                                         </td>
                                         <td>
                                             <div class="price-wrap">
@@ -113,11 +116,12 @@
                             </button>
                             <a href="{% url 'all-products' %}" class="btn btn-light btn-block w-100">Continue
                                 Shopping</a>
-                            </form>
+
                         </div>
                     </div>
                 </aside>
             </div>
+         </form>
         </div>
     </section>
 {% endblock %}

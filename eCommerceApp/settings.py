@@ -43,6 +43,8 @@ INSTALLED_APPS = [
     'category',
     'product',
     'cart',
+    'wishlist',
+    'orders',
 ]
 
 MIDDLEWARE = [
@@ -69,7 +71,8 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'category.context_processors.menu_links',
-                'cart.context_processors.counter'
+                'cart.context_processors.counter',
+                'category.context_processors.current_url'
             ],
         },
     },
@@ -146,5 +149,5 @@ MESSAGE_TAGS = {
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_HOST_USER = 'proiectfinalpython@gmail.com'
-EMAIL_HOST_PASSWORD = 'wdisbaubtoxyuqnq'
+EMAIL_HOST_PASSWORD = 'rowmkvdzosneqwrf'
 EMAIL_USE_TLS = True

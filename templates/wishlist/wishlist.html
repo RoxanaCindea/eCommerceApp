@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} Jewellery | Wishlist {% endblock %}
+
+
+{% block content %}
+    <br><br>
+    <section class="section-pagetop bg">
+        <div class="container-fluid">
+            {% if 'search' in request.path %}
+                <h2 class="title-page">Search Result</h2>
+            {% else %}
+                <h2 class="title-page">Your Wishlist({{ wishlist_items_count }})</h2>
+            {% endif %}
+        </div>
+    </section>
+    <br>
+    <section class="section-content padding-y">
+        {% if not wishlist_items %}
+            <h2 class="text-center">Your Wishlist is Empty</h2>
+        {% else %}
+            <div class="container-fluid ">
+                <div class="row">
+                    {% for wishlist_item in wishlist_items %}
+                        <div class="col-md-3 mt-3 mb-2">
+                            <div class="card card-category" style="width: 30rem;">
+                                <a class="text-secondary" href="{{ wishlist_item.product.get_url }}"><img
+                                        src="{{ wishlist_item.product.image1.url }}" class="home-img" alt="..."></a>
+                                <div class="card-body">
+                                    <h5 class="card-title"><a class="text-secondary"
+                                                              href="{{ wishlist_item.product.get_url }}">{{ wishlist_item.product.product_name }}</a>
+                                    </h5>
+                                    <p class="card-text fw-bold">{{ wishlist_item.product.price }}€</p>
+                                    <div class="btn-card-product text-center">
+                                        {% if single_product.stock <= 0 %}
+                                            <h5 class="text-danger">Out of Stock</h5>
+                                        {% endif %}
+                                        <a href="{% url 'remove_wishlist_item' wishlist_item.product.id wishlist_item.id %}"
+                                           class="trash-icon"> <span
+                                                class="text"></span> <img
+                                                src="{% static "images/trash.svg" %}"
+                                                class="btn-add" alt="image"></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        {% endif %}
+    </section>
+{% endblock %}
