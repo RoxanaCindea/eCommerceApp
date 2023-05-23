@@ -15,6 +15,7 @@ def _cart_id(request):
 def add_cart(request, product_id):
     current_user = request.user
     product = Product.objects.get(id=product_id)  # get the product
+
     # if user is authenticated
     if current_user.is_authenticated:
         product_variation = []
@@ -66,6 +67,7 @@ def add_cart(request, product_id):
                 cart_item.variations.add(*product_variation)
             cart_item.save()
         return redirect('cart')
+
     # if the user in not authenticated
     else:
         product_variation = []
@@ -162,7 +164,7 @@ def remove_cart_item(request, product_id, cart_item_id):
     return redirect('cart')
 
 
-def cart_list(request, total=0, quantity=0, cart_items=0, tax=0, grant_total=0):
+def cart_view(request, total=0, quantity=0, cart_items=0, tax=0, grant_total=0):
     try:
         if request.user.is_authenticated:
             cart_items = CartItem.objects.filter(user=request.user, is_active=True)

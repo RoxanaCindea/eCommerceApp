@@ -151,3 +151,6 @@ EMAIL_PORT = 587
 EMAIL_HOST_USER = 'proiectfinalpython@gmail.com'
 EMAIL_HOST_PASSWORD = 'rowmkvdzosneqwrf'
 EMAIL_USE_TLS = True
+
+
+SECURE_CROSS_ORIGIN_OPENER_POLICY='same-origin-allow-popups'

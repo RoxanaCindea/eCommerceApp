@@ -126,7 +126,7 @@ def login(request):
 @login_required(login_url='login')
 def logout(request):
     auth.logout(request)
-    # messages.success(request, 'You are logged out.')
+    messages.success(request, 'You are logged out.')
     return redirect('login')
 
 
@@ -149,7 +149,11 @@ def activate(request, uidb64, token):
 
 @login_required(login_url='login')
 def dashboard(request):
-    user_profile = UserProfile.objects.get(user_id=request.user.id)
+    is_user_profile_exists = UserProfile.objects.filter(user_id=request.user.id).exists()
+    if is_user_profile_exists:
+        user_profile = UserProfile.objects.get(user_id=request.user.id)
+    else:
+        user_profile = UserProfile.objects.create(user_id=request.user.id)
 
     context = {
         'user_profile': user_profile,
@@ -222,7 +226,7 @@ def reset_password(request):
 
 
 @login_required(login_url='login')
-def edit_profile(request):
+def view_edit_profile(request):
     user_profile = get_object_or_404(UserProfile, user=request.user)
     if request.method == 'POST':
         user_form = UserForm(request.POST, instance=request.user)
@@ -231,7 +235,7 @@ def edit_profile(request):
             user_form.save()
             profile_form.save()
             messages.success(request, 'Your profile has been updated.')
-            return redirect('edit_profile')
+            return redirect('view_edit_profile')
     else:
         user_form = UserForm(instance=request.user)
         profile_form = UserProfileForm(instance=user_profile)
@@ -241,7 +245,7 @@ def edit_profile(request):
         'profile_form': profile_form,
         'user_profile': user_profile,
     }
-    return render(request, 'accounts/edit_profile.html', context)
+    return render(request, 'accounts/view_edit_profile.html', context)
 
 
 @login_required(login_url='login')
@@ -258,7 +262,6 @@ def change_password(request):
             if success:
                 user.set_password(new_password)
                 user.save()
-                # auth.logout(request) - to log out the user after changing the password
                 messages.success(request, 'Password updated successfully.')
                 return redirect('change_password')
             else:

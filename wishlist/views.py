@@ -41,7 +41,7 @@ def remove_wishlist_item(request, product_id, wishlist_item_id):
     return redirect('wishlist')
 
 
-def wishlist_list(request, wishlist_items=0):
+def wishlist_view(request, wishlist_items=0):
     try:
         wishlist = Wishlist.objects.get(wishlist_id=_wishlist_id(request))
         wishlist_items = WishlistItem.objects.filter(wishlist=wishlist, is_active=True)

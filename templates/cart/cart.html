@@ -5,16 +5,17 @@
 {% block content %}
     <br>
     <section class="section-content padding-y bg">
-        <div class="container-fluid">
+        <div class="container">
             {% if not cart_items %}
                 <h2 class="text-center">Your Shopping Cart is Empty</h2>
                 <br>
                 <div class="text-center">
-                    <a href="{% url 'all-products' %}" class="btn btn-primary">Continue Shopping</a>
+                    <a href="{% url 'all-products' %}" class="btn btn-dark">Continue Shopping</a>
                 </div>
+                <br><br>
             {% else %}
                 <div class="row">
-                    <aside class="col-lg-6 offset-md-2">
+                    <aside class="col-lg-9">
                         <div class="card">
                             <table class="table table-borderless table-shopping-cart">
                                 <thead class="text-muted">
@@ -22,7 +23,6 @@
                                     <th scope="col">Product</th>
                                     <th scope="col">Quantity</th>
                                     <th scope="col">Price</th>
-                                    <th scope="col" class="text-right"></th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -32,22 +32,22 @@
                                             <figure class="item-side align-items-center">
                                                 <div class="aside"><img src="{{ cart_item.product.image1.url }}"
                                                                         class="img-sm" alt="product-image"></div>
-                                                <figcaption class="info">
-                                                    <a href="{{ cart_item.product.get_url }}"
-                                                       class="title text-dark">{{ cart_item.product.product_name }}</a>
-                                                    <p class="text-muted small">
-                                                        {% if cart_item.variations.all %}
-                                                            {% for item in cart_item.variations.all %}
-                                                                {{ item.variation_category | capfirst }}:
-                                                                {{ item.variation_value | capfirst }} <br>
-                                                            {% endfor %}
-                                                        {% endif %}
-                                                    </p>
-                                                </figcaption>
+                                                    <figcaption class="info">
+                                                        <a href="{{ cart_item.product.get_url }}"
+                                                           class="title text-dark">{{ cart_item.product.product_name }}</a>
+                                                        <p class="text-muted small">
+                                                            {% if cart_item.variations.all %}
+                                                                {% for item in cart_item.variations.all %}
+                                                                    {{ item.variation_category | capfirst }}:
+                                                                    {{ item.variation_value | capfirst }} <br>
+                                                                {% endfor %}
+                                                            {% endif %}
+                                                        </p>
+                                                    </figcaption>
                                             </figure>
                                         </td>
                                         <td>
-                                            <div class="col">
+                                            <div class="col-md-6">
                                                 <div class="input-group input-spinner">
                                                     <div class="input-group-prepend">
                                                         <a href="{% url 'remove-cart' cart_item.product.id cart_item.id %}"
@@ -55,7 +55,7 @@
                                                                 src="{% static 'images/dash-lg.svg' %}"
                                                                 alt="plus-button" height="20"></a>
                                                     </div>
-                                                    <input type="text" class="form-control"
+                                                    <input type="text" class="form-control text-center margin"
                                                            value="{{ cart_item.quantity }}">
                                                     <div class="input-group-append">
                                                         <form action="{% url 'add-cart' cart_item.product.id %}"
@@ -78,7 +78,7 @@
                                         </td>
                                         <td>
                                             <div class="price-wrap">
-                                                <var class="price">{{ cart_item.sub_total }}€</var> <br>
+                                                <var class="price">{{ cart_item.sub_total }}€</var>
                                                 <small class="text-muted">{{ cart_item.product.price }}€ each</small>
                                             </div>
                                         </td>
@@ -93,8 +93,7 @@
                             </table>
                         </div>
                     </aside>
-                    <aside class="col-lg-2">
-
+                    <aside class="col-lg-3">
                         <div class="card">
                             <div class="card-body">
                                 <dl class="dlist-align">
@@ -107,14 +106,15 @@
                                 </dl>
                                 <dl class="dlist-align">
                                     <dt>Total:</dt>
-                                    <dd class="text-right text-dark b"><strong>{{ grand_total }}€</strong></dd>
+                                    <dd class="text-right text-dark b border-bottom"><strong>{{ grand_total }}€</strong>
+                                    </dd>
                                 </dl>
-                                <hr>
                                 <p class="text-center mb-3">
                                     <img src="{% static 'images/ro.png' %}" alt='payments-image' height="60">
                                 </p>
-                                <a href="{% url 'checkout' %}" class="btn btn-primary btn-block w-100"> Checkout </a>
-                                <a href="{% url 'all-products' %}" class="btn btn-light btn-block w-100">Continue Shopping</a>
+                                <a href="{% url 'checkout' %}" class="btn btn-dark btn-block w-100 mb-2"> Checkout </a>
+                                <a href="{% url 'all-products' %}" class="btn btn-light btn-block w-100">Continue
+                                    Shopping</a>
                             </div>
                         </div>
                     </aside>
@@ -122,4 +122,5 @@
             {% endif %}
         </div>
     </section>
+    <br><br>
 {% endblock %}

@@ -181,10 +181,6 @@ a, p {
     margin-left: 20px;
 }
 
-.text-muted {
-    margin-left: 550px;
-}
-
 .list-group-item.active {
     background-color: black;
     border: black;
@@ -195,3 +191,37 @@ a, p {
     border: black;
 }
 
+
+.table-shopping-cart.table td, .table-shopping-cart.table th {
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+}
+.table-shopping-cart .price-wrap {
+  line-height: 1.2;
+}
+.table-shopping-cart .price {
+  font-weight: bold;
+  margin-right: 5px;
+  display: block;
+}
+
+.input-spinner {
+  width: 125px;
+  flex-wrap: nowrap;
+  display: inline-flex;
+  vertical-align: middle;
+}
+.input-spinner input.form-control {
+  text-align: center;
+  max-width: 46px;
+  font-weight: bold;
+  flex-basis: 46px;
+  border-color: #e4e4e4;
+  flex-grow: 0;
+}
+.input-spinner .btn {
+  width: 42px;
+  text-align: center;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
