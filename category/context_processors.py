@@ -7,5 +7,4 @@ def menu_links(request):
 
 
 def current_url(request):
-    print(request.path)
     return {'url':  request.path}

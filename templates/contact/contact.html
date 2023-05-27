@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} Jewelry | Contact {% endblock %}
+
+{% block content %}
+    <div class="container"
+         style="margin: 0 auto; width: 50%;padding: 50px; background: #E8E8E8; margin-top: 50px; margin-bottom: 50px;">
+        <div class="row row-printable">
+            <div class="col-md-12">
+                <div class="panel panel-default plain" id="dash_0">
+                    <div class="panel-body p30">
+                        <div class="row">
+                            <h1 class="about text-center mb-5">Contact</h1>
+                            <aside class="col-md-4">
+                                <h2 class="mb-3" style="color: black;">Jewel SRL</h2>
+                                <h4 style="color: black;">Phone</h4>
+                                <p style="font-size: 20px;">+40723455675</p>
+                                <h4 class="mt-3" style="color: black;">E-mail</h4>
+                                <p style="font-size: 20px;">info@jewel.ro</p>
+                                <h4 class="mt-3" style="color: black;">Address</h4>
+                                <p style="font-size: 20px;">Str. Iuliu Maniu, Nr. 204</p>
+                                <h4 class="mt-3" style="color: black;">Information</h4>
+                                <p class="mb-0" style="font-size: 20px;">CUI 37500138</p>
+                                <p style="font-size: 20px;">J25/305/2017</p>
+                            </aside>
+                            <aside class="col-md-8">
+                                <img src="{% static "images/contact.png" %}" alt="jewel"
+                                     style="width: 600px; height: 400px;">
+                            </aside>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

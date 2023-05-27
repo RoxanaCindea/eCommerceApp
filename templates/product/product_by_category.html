@@ -3,9 +3,9 @@
 
 {% block title %}
     {% if categories %}
-        Jewellery | {{ categories }}
+        Jewelry | {{ categories }}
     {% else %}
-        Jewellery | All products
+        Jewelry | All products
     {% endif %}
 {% endblock %}
 
@@ -54,40 +54,42 @@
                                 <h6 class="title title-filter">Price range</h6>
                             </header>
                             <div class="filter-content collapse show" id="collapse_3" style="">
-                                <div class="card-body">
-                                    <div class="form-row">
-                                        <div class="form-group col-md-6">
-                                            <label>Min</label>
-                                            <select class="mr-2 form-control">
-                                                <option value="0">$0</option>
-                                                <option value="50">$50</option>
-                                                <option value="100">$100</option>
-                                                <option value="150">$150</option>
-                                                <option value="200">$200</option>
-                                                <option value="500">$500</option>
-                                                <option value="1000">$1000</option>
-                                            </select>
+                                <form method="GET">
+                                    {% csrf_token %}
+                                    <div class="card-body">
+                                        <div class="form-row">
+                                            <div class="form-group col-md-6">
+                                                <label>Min</label>
+                                                <select name="min_price" class="mr-2 form-control">
+                                                    <option value="0">0€</option>
+                                                    <option value="10">10€</option>
+                                                    <option value="20">20€</option>
+                                                    <option value="30">30€</option>
+                                                    <option value="40">40€</option>
+                                                    <option value="50">50€</option>
+                                                    <option value="60">60€</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group text-right col-md-6">
+                                                <label>Max</label>
+                                                <select name="max_price" class="mr-2 form-control">
+                                                    <option value="10">10€</option>
+                                                    <option value="20">20€</option>
+                                                    <option value="30">30€</option>
+                                                    <option value="40">40€</option>
+                                                    <option value="50">50€</option>
+                                                    <option value="60">60€</option>
+                                                    <option value="70">70€</option>
+                                                </select>
+                                            </div>
                                         </div>
-                                        <div class="form-group text-right col-md-6">
-                                            <label>Max</label>
-                                            <select class="mr-2 form-control">
-                                                <option value="50">$50</option>
-                                                <option value="100">$100</option>
-                                                <option value="150">$150</option>
-                                                <option value="200">$200</option>
-                                                <option value="500">$500</option>
-                                                <option value="1000">$1000</option>
-                                                <option value="2000">$2000+</option>
-                                            </select>
-                                        </div>
+                                        <br>
+                                        <button type="submit" class="btn btn-block btn-dark w-100">Apply</button>
                                     </div>
-                                    <br>
-                                    <button class="btn btn-block btn-dark w-100">Apply</button>
-                                </div>
+                                </form>
                             </div>
                         </article>
                     </div>
-
                 </aside>
                 <main class="col-md-10">
                     <header class="border-bottom mb-4 pb-3">
@@ -111,6 +113,20 @@
                                                                           href="{{ product.get_url }}">{{ product.product_name }}</a>
                                                 </h5>
                                                 <p class="card-text fw-bold">{{ product.price }} €</p>
+                                                <div class="rating-star mb-2 mt-0">
+                                                    <span>
+                                                        <i class="fa fa-star{% if product.average_review < 0.5 %}-o{% elif product.average_review >= 0.5 and product.average_review < 1 %}-half-o {% endif %}"
+                                                           aria-hidden="true"></i>
+                                                        <i class="fa fa-star{% if product.average_review < 1.5 %}-o{% elif product.average_review >= 1.5 and product.average_review < 2 %}-half-o {% endif %}"
+                                                           aria-hidden="true"></i>
+                                                        <i class="fa fa-star{% if product.average_review < 2.5 %}-o{% elif product.average_review >= 2.5 and product.average_review < 3 %}-half-o {% endif %}"
+                                                           aria-hidden="true"></i>
+                                                        <i class="fa fa-star{% if product.average_review < 3.5 %}-o{% elif product.average_review >= 3.5 and product.average_review < 4 %}-half-o {% endif %}"
+                                                           aria-hidden="true"></i>
+                                                        <i class="fa fa-star{% if product.average_review < 4.5 %}-o{% elif product.average_review >= 4.5 and product.average_review < 4 %}-half-o {% endif %}"
+                                                           aria-hidden="true"></i>
+                                                    </span>
+                                                </div>
                                                 <div class="btn-card-product text-center">
                                                     <a href="{{ product.get_url }}"
                                                        class="btn btn-dark w-100">View Details</a>

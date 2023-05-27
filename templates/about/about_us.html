@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} Jewelry | About Us {% endblock %}
+
+{% block content %}
+    <div class="container"
+         style="margin: 0 auto; width: 50%;padding: 50px; background: #E8E8E8; margin-top: 50px; margin-bottom: 50px;">
+        <div class="row row-printable">
+            <div class="col-md-12">
+                <div class="panel panel-default plain" id="dash_0">
+                    <div class="panel-body p30">
+                        <div class="row">
+                            <h1 class="about text-center mb-5">About Us</h1>
+                            <aside class="col-md-6">
+                                <p class="text mt-5" style="font-size: 20px; text-align: justify;">
+                                    Welcome to our online jewelry store, your gateway to a world of elegance and style
+                                    that can be explored from the comfort of your own home. Step into a virtual realm
+                                    where exquisite craftsmanship and stunning designs converge, offering you a curated
+                                    selection of fine jewelry that will captivate your imagination.
+                                </p>
+                            </aside>
+                            <aside class="col-md-6">
+                                <img src="{% static "images/about1.png" %}" alt="jewel"
+                                     style="width: 450px; height: 300px;">
+                            </aside>
+                             <aside class="col-md-6 mt-5">
+                                <img src="{% static "images/about2.png" %}" alt="jewel"
+                                     style="width: 450px; height: 300px;">
+                            </aside>
+                            <aside class="col-md-6 mt-5">
+                                <p class="text mt-5" style="font-size: 20px; text-align: justify;">
+                                    Our online jewelry store is a haven for those with a discerning eye for beauty and a
+                                    passion for exceptional accessories. From the moment you enter our website, you'll
+                                    be greeted by a seamless and intuitive browsing experience that allows you to
+                                    effortlessly discover the perfect piece to adorn yourself or to gift to a loved one.
+
+                                </p>
+                            </aside>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

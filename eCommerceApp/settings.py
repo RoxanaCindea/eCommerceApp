@@ -45,6 +45,8 @@ INSTALLED_APPS = [
     'cart',
     'wishlist',
     'orders',
+    'about',
+    'contact'
 ]
 
 MIDDLEWARE = [
@@ -72,7 +74,8 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'category.context_processors.menu_links',
                 'cart.context_processors.counter',
-                'category.context_processors.current_url'
+                'wishlist.context_processors.counter_wishlist',
+                'category.context_processors.current_url',
             ],
         },
     },

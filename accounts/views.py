@@ -15,6 +15,7 @@ from django.utils.encoding import force_bytes
 from django.core.mail import EmailMessage
 from cart.models import Cart, CartItem
 from cart.views import _cart_id
+from orders.models import Order, OrderProduct
 
 
 def register(request):
@@ -149,6 +150,9 @@ def activate(request, uidb64, token):
 
 @login_required(login_url='login')
 def dashboard(request):
+    orders = Order.objects.order_by('-created_at').filter(user_id=request.user.id, is_ordered=True)
+    orders_count = orders.count()
+
     is_user_profile_exists = UserProfile.objects.filter(user_id=request.user.id).exists()
     if is_user_profile_exists:
         user_profile = UserProfile.objects.get(user_id=request.user.id)
@@ -156,6 +160,7 @@ def dashboard(request):
         user_profile = UserProfile.objects.create(user_id=request.user.id)
 
     context = {
+        'orders_count': orders_count,
         'user_profile': user_profile,
     }
     return render(request, 'accounts/dashboard.html', context)
@@ -226,6 +231,15 @@ def reset_password(request):
 
 
 @login_required(login_url='login')
+def my_orders(request):
+    orders = Order.objects.filter(user=request.user, is_ordered=True).order_by('-created_at')
+    context = {
+        'orders': orders,
+    }
+    return render(request, 'accounts/my_orders.html', context)
+
+
+@login_required(login_url='login')
 def view_edit_profile(request):
     user_profile = get_object_or_404(UserProfile, user=request.user)
     if request.method == 'POST':
@@ -271,3 +285,20 @@ def change_password(request):
             messages.error(request, 'Password does not match!')
             return redirect('change_password')
     return render(request, 'accounts/change_password.html')
+
+
+@login_required(login_url='login')
+def order_details(request, order_id):
+    order_detail = OrderProduct.objects.filter(order__order_number=order_id)
+    order = Order.objects.get(order_number=order_id)
+    subtotal = 0
+
+    for i in order_detail:
+        subtotal += i.product_price * i.quantity
+
+    context = {
+        'order_detail': order_detail,
+        'order': order,
+        'subtotal': subtotal
+    }
+    return render(request, 'accounts/order_details.html', context)

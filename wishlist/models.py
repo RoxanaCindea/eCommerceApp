@@ -17,5 +17,5 @@ class WishlistItem(models.Model):
     wishlist = models.ForeignKey(Wishlist, on_delete=models.CASCADE)
     is_active = models.BooleanField(default=True)
 
-    def __str__(self):
+    def __unicode__(self):
         return self.product

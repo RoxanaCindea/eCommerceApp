@@ -2,7 +2,7 @@ from .models import Wishlist, WishlistItem
 from .views import _wishlist_id
 
 
-def counter(request):
+def counter_wishlist(request):
     if 'admin' in request.path:
         return {}
     else:
@@ -11,10 +11,9 @@ def counter(request):
             if request.user.is_authenticated:
                 wishlist_items = WishlistItem.objects.all().filter(user=request.user)
             else:
-                wishlist_items = WishlistItem.objects.all().filter(wishlist=wishlist)
-
+                wishlist_items = WishlistItem.objects.all().filter(wishlist=wishlist[:1])
             wishlist_count = wishlist_items.count()
-            print(wishlist_count)
+
         except Wishlist.DoesNotExist:
             wishlist_count = 0
 

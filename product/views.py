@@ -4,6 +4,7 @@ from django.shortcuts import get_object_or_404, render, redirect
 from cart.models import CartItem
 from cart.views import _cart_id
 from category.models import Category
+from orders.models import OrderProduct
 from product.forms import ReviewForm
 from product.models import Product, ReviewRating
 from django.core.paginator import Paginator
@@ -15,13 +16,24 @@ def products_by_category(request, category_slug=None):
     if category_slug is not None:
         categories = get_object_or_404(Category, slug=category_slug)
         products = Product.objects.filter(category=categories, is_available=True)
-        paginator = Paginator(products, 4)
+        paginator = Paginator(products, 8)
         page = request.GET.get('page')
         paged_products = paginator.get_page(page)
         product_count = products.count()
     else:
         products = Product.objects.all().filter(is_available=True).order_by('id')
-        paginator = Paginator(products, 4)
+        paginator = Paginator(products, 8)
+        page = request.GET.get('page')
+        paged_products = paginator.get_page(page)
+        product_count = products.count()
+
+    if 'min_price' in request.GET:
+        filter_price1 = request.GET.get('min_price')
+        filter_price2 = request.GET.get('max_price')
+        if filter_price1 == '':
+            filter_price1 = 0
+        products = Product.objects.filter(price__range=(filter_price1, filter_price2))
+        paginator = Paginator(products, 8)
         page = request.GET.get('page')
         paged_products = paginator.get_page(page)
         product_count = products.count()
@@ -41,6 +53,13 @@ def product_detail(request, category_slug, product_slug):
         in_cart = CartItem.objects.filter(cart__cart_id=_cart_id(request), product=single_product).exists()
     except Exception as e:
         raise e
+    if request.user.is_authenticated:
+        try:
+            order_product = OrderProduct.objects.filter(user=request.user, product_id=single_product.id).exists()
+        except OrderProduct.DoesNotExist:
+            order_product = None
+    else:
+        order_product = 0
 
     # Get the reviews
     reviews = ReviewRating.objects.filter(product_id=single_product.id, status=True)
@@ -48,6 +67,7 @@ def product_detail(request, category_slug, product_slug):
     context = {
         'single_product': single_product,
         'in_cart': in_cart,
+        'order_product': order_product,
         'reviews': reviews,
     }
     return render(request, 'product/product_detail.html', context)
