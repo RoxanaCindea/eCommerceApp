@@ -88,7 +88,7 @@
                                 <div class="row">
                                     <div class="item-option-select">
                                         <h6>Select Size</h6>
-                                        <select name="size" class="form-control w-50">
+                                        <select name="size" class="form-control w-50" required>
                                             <option value="" disabled selected>Select</option>
                                             {% for i in single_product.variation_set.sizes %}
                                                 <option value="{{ i.variation_value | lower }}">{{ i.variation_value | capfirst }}</option>
@@ -105,11 +105,19 @@
                                             src="{% static "images/bag.svg" %}"
                                             class="btn-add" alt="image"></button>
                                 {% endif %}
-                                <a href="{% url 'add_wishlist' single_product.id %}"
-                                   class="btn btn-light w-25"> <span
-                                        class="text"></span> <img
-                                        src="{% static "images/heart.svg" %}"
-                                        class="btn-add" alt="image"></a>
+                                {% if in_wishlist %}
+                                    <a href="{% url 'add_wishlist' single_product.id %}"
+                                       class="btn btn-dark w-25 disabled"> <span
+                                            class="text"></span> <img
+                                            src="{% static "images/heart.svg" %}"
+                                            class="btn-add" alt="image"></a>
+                                {% else %}
+                                    <a href="{% url 'add_wishlist' single_product.id %}"
+                                       class="btn btn-light w-25"> <span
+                                            class="text"></span> <img
+                                            src="{% static "images/heart.svg" %}"
+                                            class="btn-add" alt="image"></a>
+                                {% endif %}
                             </article>
                         </form>
                     </main>
