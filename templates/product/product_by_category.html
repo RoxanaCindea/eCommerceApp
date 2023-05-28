@@ -4,6 +4,8 @@
 {% block title %}
     {% if categories %}
         Jewelry | {{ categories }}
+    {% elif 'search' in request.path %}
+        Jewelry | Search Result
     {% else %}
         Jewelry | All products
     {% endif %}
@@ -123,7 +125,7 @@
                                                            aria-hidden="true"></i>
                                                         <i class="fa fa-star{% if product.average_review < 3.5 %}-o{% elif product.average_review >= 3.5 and product.average_review < 4 %}-half-o {% endif %}"
                                                            aria-hidden="true"></i>
-                                                        <i class="fa fa-star{% if product.average_review < 4.5 %}-o{% elif product.average_review >= 4.5 and product.average_review < 4 %}-half-o {% endif %}"
+                                                        <i class="fa fa-star{% if product.average_review < 4.5 %}-o{% elif product.average_review >= 4.5 and product.average_review < 5 %}-half-o {% endif %}"
                                                            aria-hidden="true"></i>
                                                     </span>
                                                 </div>

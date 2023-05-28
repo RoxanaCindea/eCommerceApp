@@ -4,11 +4,11 @@ from product.models import Product
 
 
 class Wishlist(models.Model):
-    wishlist_id = models.CharField(max_length=250, blank=True)
+    session = models.CharField(max_length=250, blank=True)
     date_added = models.DateField(auto_now_add=True)
 
     def __str__(self):
-        return self.wishlist_id
+        return self.session
 
 
 class WishlistItem(models.Model):

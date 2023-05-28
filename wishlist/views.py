@@ -17,28 +17,29 @@ def add_wishlist(request, product_id):
     if request.user.is_authenticated:
         is_wishlist_item_exists = WishlistItem.objects.filter(product=product, user=request.user).exists()
         if is_wishlist_item_exists:
-            wishlist_item = WishlistItem.objects.filter(product=product, user=request.user)
+            wishlist_item = WishlistItem.objects.get(product=product, user=request.user)
             wishlist_item.save()
         else:
-            wishlist_item = WishlistItem.objects.create(product=product, user=request.user)
+            wishlist = Wishlist.objects.create(session=_wishlist_id(request))
+            wishlist_item = WishlistItem.objects.create(product=product, user=request.user, wishlist=wishlist)
             wishlist_item.save()
         return redirect('wishlist')
+
     else:
         try:
             # get the wishlist using the wishlist_id present in the session
-            wishlist = Wishlist.objects.get(wishlist_id=_wishlist_id(request))
+            wishlist = Wishlist.objects.get(session=_wishlist_id(request))
         except Wishlist.DoesNotExist:
-            wishlist = Wishlist.objects.create(wishlist_id=_wishlist_id(request))
+            wishlist = Wishlist.objects.create(session=_wishlist_id(request))
         wishlist.save()
 
-        is_wishlist_item_exists = WishlistItem.objects.filter(product=product, user=request.user).exists()
-        if is_wishlist_item_exists:
-            wishlist_item = WishlistItem.objects.filter(product=product, wishlist=wishlist)
-            wishlist_item.save()
-        else:
-            wishlist_item = WishlistItem.objects.create(product=product, wishlist=wishlist)
-            wishlist_item.save()
-        return redirect('wishlist')
+    try:
+        wishlist_item = WishlistItem.objects.get(product=product, wishlist=wishlist)
+        wishlist_item.save()
+    except WishlistItem.DoesNotExist:
+        wishlist_item = WishlistItem.objects.create(product=product, wishlist=wishlist)
+        wishlist_item.save()
+    return redirect('wishlist')
 
 
 def remove_wishlist_item(request, product_id, wishlist_item_id):
@@ -46,7 +47,7 @@ def remove_wishlist_item(request, product_id, wishlist_item_id):
     if request.user.is_authenticated:
         wishlist_item = WishlistItem.objects.get(product=product, user=request.user, id=wishlist_item_id)
     else:
-        wishlist = Wishlist.objects.get(wishlist_id=_wishlist_id(request))
+        wishlist = Wishlist.objects.get(session=_wishlist_id(request))
         wishlist_item = WishlistItem.objects.get(product=product, wishlist=wishlist, id=wishlist_item_id)
     wishlist_item.delete()
     return redirect('wishlist')
@@ -57,7 +58,7 @@ def wishlist_view(request, wishlist_items=0):
         if request.user.is_authenticated:
             wishlist_items = WishlistItem.objects.filter(user=request.user, is_active=True)
         else:
-            wishlist = Wishlist.objects.get(wishlist_id=_wishlist_id(request))
+            wishlist = Wishlist.objects.get(session=_wishlist_id(request))
             wishlist_items = WishlistItem.objects.filter(wishlist=wishlist, is_active=True)
 
     except ObjectDoesNotExist:

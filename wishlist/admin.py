@@ -3,7 +3,7 @@ from wishlist.models import Wishlist, WishlistItem
 
 
 class WishlistAdmin(admin.ModelAdmin):
-    list_display = ('wishlist_id', 'date_added')
+    list_display = ('session', 'date_added')
 
 
 class WishlistItemAdmin(admin.ModelAdmin):

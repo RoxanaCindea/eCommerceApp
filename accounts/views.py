@@ -16,6 +16,8 @@ from django.core.mail import EmailMessage
 from cart.models import Cart, CartItem
 from cart.views import _cart_id
 from orders.models import Order, OrderProduct
+from wishlist.models import Wishlist, WishlistItem
+from wishlist.views import _wishlist_id
 
 
 def register(request):
@@ -48,7 +50,7 @@ def register(request):
             # messages.success(request,
             #                  'Thank you for registering with us. \
             #                  We have sent you a verification email to your email address. please verify it.')
-            return redirect('/accounts/login/?command=verification&email='+email)
+            return redirect('/accounts/login/?command=verification&email=' + email)
     else:
         form = RegistrationForm()
 
@@ -105,6 +107,17 @@ def login(request):
                                 item.save()
             except:
                 pass
+
+            try:
+                wishlist = Wishlist.objects.get(session=_wishlist_id(request))
+                wishlist_item = WishlistItem.objects.filter(wishlist=wishlist)
+                for item in wishlist_item:
+                    item.user = user
+                    item.save()
+
+            except:
+                pass
+
             auth.login(request, user)
             messages.success(request, 'You are now logged in.')
             url = request.META.get('HTTP_REFERER')
