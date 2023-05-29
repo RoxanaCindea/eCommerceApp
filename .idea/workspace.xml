@@ -7,8 +7,7 @@
     <list default="true" id="b5beb933-793b-4918-b3af-a502e22a5860" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/product/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/product/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/product/product_detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/product/product_detail.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/orders/order_complete.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/orders/order_complete.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -120,7 +119,9 @@
       <workItem from="1684858346355" duration="11828000" />
       <workItem from="1684942556725" duration="12298000" />
       <workItem from="1685169820090" duration="35353000" />
-      <workItem from="1685259210068" duration="3830000" />
+      <workItem from="1685259210068" duration="4701000" />
+      <workItem from="1685297253732" duration="2231000" />
+      <workItem from="1685337367265" duration="317000" />
     </task>
     <servers />
   </component>
