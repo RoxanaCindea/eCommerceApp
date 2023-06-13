@@ -3,3 +3,5 @@ The goal of this project was to implement an e-commerce web application that pro
 
 
 In addition to the functionality described above, the application provides the following functionality for users registration, LOGIN/LOGOUT, view and edit profile, reset password, change password.
+
+![Uploading image.png…]()
